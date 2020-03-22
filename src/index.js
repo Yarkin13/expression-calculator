@@ -28,13 +28,13 @@ function expressionCalculator(expr) {
     }
     let openBracket=arr.indexOf('(')
     let closeBracket=arr.indexOf(')')//ищу индекс открытой и закрытой скобки
-    inBrackets=arr.slice(openBracket,closeBracket+1)//извлекаю массив элементов которые были в скобках
-    if (inBrackets.length){
-        arr.splice(openBracket,closeBracket-openBracket+1)
+    inBrackets=arr.slice(openBracket,closeBracket+1)//извлекаю массив элементов которые были в скобках (если есть)
+    if (inBrackets.length){ //работа с массивом InBrackets
+        arr.splice(openBracket,closeBracket-openBracket+1)//извлекаю из главного массива элементы которые будут считаться в скобках
         inBrackets.splice(0,1);
         inBrackets.splice(-1,1);//убираю скобки из массива
         let q=0;
-        while(q<inBrackets.length) {
+        while(q<inBrackets.length) { //считаю скобки
             if(inBrackets[q]=="*") {
                 preresult=inBrackets[q-1]*inBrackets[q+1];
                 inBrackets.splice(q-1,3,preresult);
@@ -58,11 +58,11 @@ function expressionCalculator(expr) {
                 w=0;
             }   else w++;
         }   
-        arr.splice(openBracket,0,preresult)     
+        arr.splice(openBracket,0,preresult)    //вставляю результат из скобок в общий массив 
     }
     
     let i=0;
-    while(i<arr.length) {
+    while(i<arr.length) {//считаю главный массив
         if(arr[i]=="*") {
             preresult=arr[i-1]*arr[i+1];
             arr.splice(i-1,3,preresult);
